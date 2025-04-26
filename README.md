@@ -42,8 +42,6 @@ OpenRouter API (Google Gemma Model)
 
 Requests
 
-JSON
-
 HTML/CSS (Basic Frontend)
 
 🔄 Pipeline Overview
