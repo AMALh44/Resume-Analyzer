@@ -30,19 +30,19 @@ All resume data is securely stored in a SQLite database for record-keeping and f
 
 🛠️ Technologies Used
 
-Python 🐍
+  * Python 🐍
 
-Flask
+  * Flask
 
-SQLite
+  * SQLite
 
-PyPDF2
+  * PyPDF2
 
-OpenRouter API (Google Gemma Model)
+  * OpenRouter API (Google Gemma Model)
 
-Requests
+  * Requests
 
-HTML/CSS (Basic Frontend)
+  * HTML/CSS (Basic Frontend)
 
 🔄 Pipeline Overview
 
