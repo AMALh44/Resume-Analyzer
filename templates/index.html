@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ResumeATS Pro</title>
+    <link rel="stylesheet" href="static/styles.css">
+   
+</head>
+<body>
+
+    <div class="container">
+        <h1>ResumeATS Pro</h1>
+        <h3>Optimize Your Resume for ATS and Land Your Dream Job</h3>
+
+        <form id="upload-form" enctype="multipart/form-data">
+            <label for="resume">Upload your resume (PDF):</label>
+            <input type="file" id="resume" name="resume" accept=".pdf" required>
+
+            <label for="job_description">Enter the job description (optional):</label>
+            <textarea id="job_description" name="job_description" rows="4"></textarea>
+
+            <label for="analysis_option">Choose analysis type:</label>
+            <select id="analysis_option" name="analysis_option">
+                <option value="Quick Scan">Quick Scan</option>
+                <option value="Detailed Analysis">Detailed Analysis</option>
+                <option value="Personalized Job Recommendations">Personalized Job Recommendations</option>
+                <option value="ATS Score Checker">ATS Score Checker</option>
+            </select>
+
+            <button type="submit">Analyze Resume</button>
+        </form>
+
+        <!-- Loading Spinner -->
+        <div id="loader" class="loader"></div>
+
+        <div id="result" class="output"></div>
+    </div>
+
+    <script>
+        document.getElementById("upload-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            let formData = new FormData(this);
+            let loader = document.getElementById("loader");
+            let resultDiv = document.getElementById("result");
+
+            // Show loader and clear previous results
+            loader.style.display = "block";
+            resultDiv.innerHTML = "";
+
+            fetch("/analyze", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Hide loader and show results
+                loader.style.display = "none";
+                resultDiv.innerHTML = "<h3>Analysis Results:</h3><p>" + data.analysis.replace(/\n/g, "<br>") + "</p>";
+            })
+            .catch(error => {
+                loader.style.display = "none";
+                resultDiv.innerHTML = "<p style='color: red;'>Error: Unable to process the request.</p>";
+                console.error("Error:", error);
+            });
+        });
+    </script>
+
+</body>
+</html>
